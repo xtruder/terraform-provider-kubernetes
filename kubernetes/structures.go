@@ -134,6 +134,15 @@ func byteMapToStringMap(m map[string][]byte) map[string]string {
 	return result
 }
 
+func replaceDotsWithSlashes(m map[string]string) map[string]string {
+	result := make(map[string]string)
+	for k, v := range m {
+		result[strings.Replace(k, ".", "/", -1)] = v
+	}
+
+	return result
+}
+
 func ptrToString(s string) *string {
 	return &s
 }

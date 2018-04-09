@@ -92,7 +92,7 @@ func resourceKubernetesSecretRead(d *schema.ResourceData, meta interface{}) erro
 		return err
 	}
 
-	d.Set("output_data", byteMapToStringMap(secret.Data))
+	d.Set("output_data", replaceDotsWithSlashes(byteMapToStringMap(secret.Data)))
 	d.Set("type", secret.Type)
 
 	return nil
