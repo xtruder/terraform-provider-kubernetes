@@ -32,6 +32,10 @@ func resourceKubernetesSecret() *schema.Resource {
 				Optional:    true,
 				Sensitive:   true,
 			},
+			"output_data": &schema.Schema{
+				Type:     schema.TypeMap,
+				Computed: true,
+			},
 			"type": {
 				Type:        schema.TypeString,
 				Description: "Type of secret",
@@ -88,7 +92,7 @@ func resourceKubernetesSecretRead(d *schema.ResourceData, meta interface{}) erro
 		return err
 	}
 
-	d.Set("data", byteMapToStringMap(secret.Data))
+	d.Set("output_data", byteMapToStringMap(secret.Data))
 	d.Set("type", secret.Type)
 
 	return nil
